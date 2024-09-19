@@ -1,0 +1,26 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:14  # Puedes especificar la versión que necesites
+    container_name: socio_db
+    environment:
+      POSTGRES_USER: juarangoz
+      POSTGRES_PASSWORD: juarangoz
+      POSTGRES_DB: socio_db
+    ports:
+      - "5432:5432"  # Mapea el puerto 5432 del contenedor al puerto 5432 del host
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  # Persistencia de datos
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "8080:80"
+
+volumes:
+  postgres_data:
