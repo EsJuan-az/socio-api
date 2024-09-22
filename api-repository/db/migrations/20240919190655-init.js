@@ -3,12 +3,6 @@
 const { Sequelize } = require('sequelize');
 
 const userSchema = {
-  id: {
-    type: Sequelize.UUID,
-    defaultValue: Sequelize.UUIDV4,
-    allowNull: false,
-    primaryKey: true,
-  },
   name: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -57,7 +51,7 @@ const businessSchema = {
     allowNull: false,
     references: {
       model: 'users', 
-      key: 'id',
+      key: 'auth0_id',
     },
     onUpdate: 'CASCADE',
     onDelete: 'SET NULL',
