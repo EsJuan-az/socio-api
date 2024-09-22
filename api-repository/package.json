@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "start:dev": "nodemon --config ../nodemon.json src/index.js",
     "start": "node src/index.js",
     "model:generate": "sequelize-cli model:generate --name",
     "migration:generate": "sequelize-cli migration:generate --name",

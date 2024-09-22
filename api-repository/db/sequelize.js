@@ -8,7 +8,7 @@ const { defineModels } = require('./models');
 const { env, sequelizeConfig } = conf;
 const envConf = sequelizeConfig[env];
 
-const sequelize = new Sequelize(envConf);
+const sequelize = new Sequelize(envConf.url, envConf);
 const db = defineModels(sequelize);
 module.exports = {
   db,

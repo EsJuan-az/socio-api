@@ -38,6 +38,11 @@ const BusinessSchema = {
     defaultValue: 'placeholder',
     field: 'picture_url',
   },
+  active: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: true,
+    allowNull: false,
+  },
   createdAt: {
     type: DataTypes.DATE,
     allowNull: false,

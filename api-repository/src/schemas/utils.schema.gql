@@ -1,0 +1,4 @@
+input GetAllDto {
+  offset: Int
+  limit: Int
+}

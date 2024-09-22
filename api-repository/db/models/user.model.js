@@ -25,6 +25,11 @@ const UserSchema = {
     defaultValue: 'placeholder',
     field: 'picture_url',
   },
+  active: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: true,
+    allowNull: false,
+  },
   createdAt: {
     field: 'created_at',
     type: DataTypes.DATE,

@@ -11,6 +11,11 @@ const userSchema = {
     type: Sequelize.STRING,
     allowNull: false,
   },
+  active: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: true,
+    allowNull: false,
+  },
   auth0_id: {
     type: Sequelize.STRING,
     primaryKey: true,
@@ -30,7 +35,7 @@ const userSchema = {
     allowNull: false,
     defaultValue: Sequelize.NOW,
   },
-}
+};
 const businessSchema = {
   id: {
     type: Sequelize.UUID,
@@ -46,11 +51,16 @@ const businessSchema = {
     type: Sequelize.STRING,
     primaryKey: true,
   },
+  active: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: true,
+    allowNull: false,
+  },
   owner_id: {
     type: Sequelize.STRING,
     allowNull: false,
     references: {
-      model: 'users', 
+      model: 'users',
       key: 'auth0_id',
     },
     onUpdate: 'CASCADE',
@@ -75,13 +85,12 @@ const businessSchema = {
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('users', userSchema)
+    await queryInterface.createTable('users', userSchema);
     await queryInterface.createTable('businesses', businessSchema);
   },
 
   down: async (queryInterface) => {
-    await queryInterface.dropTable('business');
-    await queryInterface.dropTable('users');
-    
+    await queryInterface.dropTable('business', { cascade: true });
+    await queryInterface.dropTable('users', { cascade: true });
   },
 };

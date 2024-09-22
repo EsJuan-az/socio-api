@@ -4,6 +4,10 @@ const {
 } = require('apollo-server-core');
 const { env } = require('../../config');
 const express = require('express');
+const {
+  typeDefs: scalarTypes,
+  resolvers: scalarResolvers,
+} = require('graphql-scalars');
 /**
  * GQLServer.js
  * Will instanciate an express application with its /graphql endpoint set.
@@ -14,9 +18,12 @@ class GQLServer {
     this.app = express();
     this.config = apolloConf;
     this.apollo = new ApolloServer({
-      playground: env === 'development',
       plugins: [ApolloServerPluginLandingPageGraphQLPlayground],
-      ...apolloConf,
+      typeDefs: [...scalarTypes, ...apolloConf.typeDefs],
+      resolvers: {
+        ...scalarResolvers,
+        ...apolloConf.resolvers,
+      },
     });
   }
   async listen() {

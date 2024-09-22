@@ -1,0 +1,16 @@
+type User {
+  name: String!
+  email: EmailAddress!
+  pictureUrl: URL!
+}
+input CreateUserDto {
+  auth0Id: ID!
+  name: String!
+  email: EmailAddress!
+  pictureUrl: URL!
+}
+input UpdateUserDto {
+  name: String
+  email: EmailAddress
+  pictureUrl: URL
+}
