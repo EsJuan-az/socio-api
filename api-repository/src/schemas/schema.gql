@@ -2,9 +2,18 @@ type Query {
   books: [String]
   users(dto: GetAllDto): [User!]!
   user(id: ID!): User!
+  getUserByAuth0( auth0Id: ID! ): User!
+
+  businesses(dto: GetAllDto): [Business!]!
+  business(id: ID!): Business!
+  getBusinessByOwnerId( ownerId: ID! ): Business!
 }
 type Mutation {
   createUser(dto: CreateUserDto!): User!
   updateUser(id: ID!, dto: UpdateUserDto!): User!
   deleteUser(id: ID!): User!
+
+  createBusiness(dto: CreateBusinessDto!): Business!
+  updateBusiness(id: ID!, dto: UpdateBusinessDto!): Business!
+  deleteBusiness(id: ID!): Business!
 }

@@ -1,9 +1,18 @@
 const {
+  businesses,
+  business,
+  getBusinessByOwnerId,
+  deleteBusiness,
+  updateBusiness,
+  createBusiness,
+} = require('./business.resolver');
+const {
   users,
   createUser,
   user,
   updateUser,
   deleteUser,
+  getUserByAuth0,
 } = require('./user.resolver');
 
 module.exports = {
@@ -16,10 +25,17 @@ module.exports = {
     ],
     users,
     user,
+    getUserByAuth0,
+    businesses,
+    business,
+    getBusinessByOwnerId,
   },
   Mutation: {
     createUser,
     updateUser,
     deleteUser,
+    createBusiness,
+    updateBusiness,
+    deleteBusiness,
   },
 };

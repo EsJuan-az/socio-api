@@ -6,6 +6,11 @@
 const { Model, DataTypes } = require('sequelize');
 const USER_TABLE = 'users';
 const UserSchema = {
+  id: {
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
+    primaryKey: true,
+  },
   name: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -13,10 +18,12 @@ const UserSchema = {
   email: {
     type: DataTypes.STRING,
     allowNull: false,
+    unique: true,
   },
   auth0Id: {
     type: DataTypes.STRING,
-    primaryKey: true,
+    unique: true,
+    allowNull: true,
     field: 'auth0_id',
   },
   pictureUrl: {
@@ -48,7 +55,7 @@ class User extends Model {
     // User owns many businesses.
     this.hasMany(Business, {
       as: 'businesses',
-      foreignKey: 'userId',
+      foreignKey: 'ownerId',
     });
   }
 

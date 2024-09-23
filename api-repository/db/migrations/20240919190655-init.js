@@ -1,8 +1,16 @@
+/* eslint-disable camelcase */
+// @ts-nocheck
 'use strict';
 
 const { Sequelize } = require('sequelize');
 
 const userSchema = {
+  id: {
+    type: Sequelize.UUID,
+    defaultValue: Sequelize.UUIDV4, // Genera automáticamente un UUID
+    allowNull: false,
+    primaryKey: true,
+  },
   name: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -10,6 +18,7 @@ const userSchema = {
   email: {
     type: Sequelize.STRING,
     allowNull: false,
+    unique: true,
   },
   active: {
     type: Sequelize.BOOLEAN,
@@ -18,7 +27,8 @@ const userSchema = {
   },
   auth0_id: {
     type: Sequelize.STRING,
-    primaryKey: true,
+    unique: true,
+    allowNull: true,
   },
   picture_url: {
     type: Sequelize.STRING,
@@ -49,7 +59,8 @@ const businessSchema = {
   },
   NIT: {
     type: Sequelize.STRING,
-    primaryKey: true,
+    unique: true,
+    allowNull: false,
   },
   active: {
     type: Sequelize.BOOLEAN,
@@ -57,11 +68,11 @@ const businessSchema = {
     allowNull: false,
   },
   owner_id: {
-    type: Sequelize.STRING,
+    type: Sequelize.UUID,
     allowNull: false,
     references: {
       model: 'users',
-      key: 'auth0_id',
+      key: 'id',
     },
     onUpdate: 'CASCADE',
     onDelete: 'SET NULL',
@@ -84,13 +95,13 @@ const businessSchema = {
 };
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
+  up: async (queryInterface) => {
     await queryInterface.createTable('users', userSchema);
     await queryInterface.createTable('businesses', businessSchema);
   },
 
   down: async (queryInterface) => {
-    await queryInterface.dropTable('business', { cascade: true });
+    await queryInterface.dropTable('businesses', { cascade: true });
     await queryInterface.dropTable('users', { cascade: true });
   },
 };

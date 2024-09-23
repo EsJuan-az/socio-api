@@ -11,6 +11,10 @@ module.exports = {
     const result = await UserService.findOne(id);
     return result;
   },
+  async getUserByAuth0(_, { auth0Id }) {
+    const result = await UserService.findOneByAuth0Id(auth0Id);
+    return result;
+  },
   async createUser(_, { dto }) {
     dto.pictureUrl = dto.pictureUrl.href;
     const result = await UserService.create(dto);

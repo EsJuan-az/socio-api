@@ -18,7 +18,8 @@ const BusinessSchema = {
   },
   nit: {
     type: DataTypes.STRING,
-    primaryKey: true,
+    unique: true,
+    allowNull: false,
     field: 'NIT',
   },
   ownerId: {

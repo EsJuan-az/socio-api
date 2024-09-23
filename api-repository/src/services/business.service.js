@@ -1,13 +1,13 @@
 const { notFound } = require('@hapi/boom');
 const { db } = require('../../db/sequelize');
-const { User } = db.models;
+const { Business } = db.models;
 /**
- * UserService: Class to handle model requests through
+ * BusinessService: Class to handle model requests through
  * static methods.
  */
-class UserService {
+class BusinessService {
   static findAll(offset = 0, limit = 10) {
-    return User.findAll({
+    return Business.findAll({
       where: {
         active: true,
       },
@@ -16,31 +16,28 @@ class UserService {
     });
   }
   static async findOne(id) {
-    const result = await User.findOne({
+    const result = await Business.findOne({
       where: {
         id,
         active: true,
       },
     });
     if (!result) {
-      throw notFound('user not found');
+      throw notFound('business not found');
     }
     return result;
   }
-  static async findOneByAuth0Id(auth0Id) {
-    const result = await User.findOne({
+  static async findByOwnerId(ownerId) {
+    const result = await Business.find({
       where: {
-        auth0Id,
+        ownerId,
         active: true,
       },
     });
-    if (!result) {
-      throw notFound('user not found');
-    }
     return result;
   }
   static create(dto) {
-    return User.create(dto);
+    return Business.create(dto);
   }
   static async update(id, dto) {
     const entity = await this.findOne(id);
@@ -52,4 +49,4 @@ class UserService {
     return result;
   }
 }
-module.exports = { UserService };
+module.exports = { BusinessService };

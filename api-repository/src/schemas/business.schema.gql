@@ -1,0 +1,18 @@
+type Business {
+  id: ID!
+  name: String!
+  nit: String!
+  ownerId: ID!
+  pictureUrl: URL!
+}
+input CreateBusinessDto {
+  name: String!
+  nit: String!
+  ownerId: ID!
+  pictureUrl: URL!
+}
+input UpdateBusinessDto {
+  name: String!
+  nit: String!
+  pictureUrl: URL!
+}
